@@ -30,7 +30,7 @@ module.exports = function(source) {
           .match(new RegExp(`${searchFor}\\=".+?"`))[0]
           .replace(`${searchFor}=`, "")
           .replace(/\"/g, "");
-        const realPath = path.resolve(__dirname, pathFoundInFile);
+        const realPath = path.resolve(process.cwd(), pathFoundInFile);
 
         this.addDependency(realPath);
 
