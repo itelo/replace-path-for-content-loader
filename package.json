@@ -1,0 +1,15 @@
+{
+  "name": "replace-path-for-content-loader",
+  "version": "1.0.0",
+  "description": "a easy way to inject file contents using webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Itelo Filho <itelofilho@gmail.com> (https://github.com/itelofilho)",
+  "license": "ISC",
+  "dependencies": {
+    "loader-utils": "2.0.0",
+    "schema-utils": "2.6.5"
+  }
+}
