@@ -32,9 +32,9 @@ module.exports = function(source) {
           .replace(/\"/g, "");
         const realPath = path.resolve(process.cwd(), pathFoundInFile);
 
-        this.addDependency(realPath);
+        this.addDependency(require.resolve(realPath));
 
-        const file = fs.readFileSync(realPath, "utf-8");
+        const file = fs.readFileSync(require.resolve(realPath), "utf-8");
         const content = result2.replace(
           new RegExp(`.*\\${options.specialChar}${searchFor}\\=".+?"`),
           `${searchFor}={\`\n${file.replace(/\`/g, "\\`")}\`}`
