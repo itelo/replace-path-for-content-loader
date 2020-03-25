@@ -37,7 +37,7 @@ module.exports = function(source) {
         const file = fs.readFileSync(realPath, "utf-8");
         const content = result2.replace(
           new RegExp(`.*\\${options.specialChar}${searchFor}\\=".+?"`),
-          `${searchFor}={\`\n${file}\`}`
+          `${searchFor}={\`\n${file.replace(/\`/g, "\\`")}\`}`
         );
 
         return (content + endOfString).replace(/\n/g, "\\n");

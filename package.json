@@ -1,6 +1,6 @@
 {
   "name": "replace-path-for-content-loader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a easy way to inject file contents using webpack",
   "main": "index.js",
   "scripts": {
