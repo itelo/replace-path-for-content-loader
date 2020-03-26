@@ -15,13 +15,17 @@ const schema = {
   }
 };
 
+const escapeTemplateStrings = file =>
+  file.replace(/\$/g, "\\$").replace(/`/g, "\\`");
+
 module.exports = function(source) {
   const options = getOptions(this);
 
   validateOptions(schema, options, "replace-path-for-content-loader");
+
   return options.searchFor.reduce((fileData, searchFor) => {
     return fileData.replace(
-      new RegExp(`.*\\${options.specialChar}${searchFor}\\=.*`),
+      new RegExp(`.*\\${options.specialChar}${searchFor}\\=.*`, "g"),
       result => {
         const result2 = result.match(new RegExp(`.*${searchFor}\\=".+?"`))[0];
         const endOfString = result.replace(result2, "");
@@ -37,7 +41,7 @@ module.exports = function(source) {
         const file = fs.readFileSync(require.resolve(realPath), "utf-8");
         const content = result2.replace(
           new RegExp(`.*\\${options.specialChar}${searchFor}\\=".+?"`),
-          `${searchFor}={\`\n${file.replace(/\`/g, "\\`")}\`}`
+          `${searchFor}={\`\n${escapeTemplateStrings(file)}\`}`
         );
 
         return (content + endOfString).replace(/\n/g, "\\n");
